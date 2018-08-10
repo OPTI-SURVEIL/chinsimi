@@ -1,2 +1,2 @@
-# chinsimi
-name similarity calculations for simplified Chinese character data
+# ChinSimi
+Measuring the Similarity between Chinese Strings
