@@ -11,7 +11,7 @@
 
 
 
-ChStr2py <- function(Chin.strs = "", method = c("toneless", "tone"), multi = FALSE, sep = "_", parallel = FALSE)
+ChStr2py <- function(Chin.strs = "", method = c("toneless", "tone"), multi = TRUE, sep = "_", parallel = FALSE)
 {
   method <- match.arg(method)
 
@@ -27,12 +27,14 @@ ChStr2py <- function(Chin.strs = "", method = c("toneless", "tone"), multi = FAL
 
       if(length(ChCharpy)==0){
         ChCharpy <- Chin.char
-        }else{
-          ChCharpy <- switch(method, tone = ChCharpy, toneless = gsub("[1-4]","", ChCharpy))
-          if(multi){
-            ChCharpy <- ifelse(grepl(",", ChCharpy), paste0("[", ChCharpy, "]"),  ChCharpy)
-          }
+      }else{
+        ChCharpy <- switch(method, tone = ChCharpy, toneless = gsub("[1-4]","", ChCharpy))
+        if(multi){
+          ChCharpy <- ifelse(grepl(",", ChCharpy), paste0("[", ChCharpy, "]"),  ChCharpy)
+        } else {
+          ChCharpy <- ifelse(grepl(",",ChCharpy), substr(ChCharpy, 1, gregexpr(pattern =',', ChCharpy)[[1]][1]-1), ChCharpy)
         }
+      }
 
       return(ChCharpy)
     }
