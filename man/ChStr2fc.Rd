@@ -19,3 +19,6 @@ four corner code of \code{Chin.str}.
 \description{
 Convert Chinese strings to four corner code.
 }
+\examples{
+ChStr2fc(c("海上生明月","天涯共此时"))
+}
