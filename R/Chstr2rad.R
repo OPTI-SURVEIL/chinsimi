@@ -10,7 +10,7 @@
 Chstr2rad = function(n, times = 1) {
   temp = strsplit(n, '')
   t = 0
-  inds = 1:length(twmp)
+  inds = 1:length(temp)
   while(t < times){
     if(t==0){
       rads = lapply(temp,function(v){
