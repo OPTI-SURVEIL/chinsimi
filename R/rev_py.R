@@ -17,7 +17,7 @@
 revpy = function(n,all=F,py=F){
   todo = grep('\\{.*?\\}',n)
   if(py){
-    lapply(n[todo],function(n_){
+    n[todo] = sapply(n[todo],function(n_){
       matches = regmatches(n_,gregexpr('\\{.*?\\}',n_))[[1]]
       combns = as.list(strsplit(n_,'\\{.*?\\}')[[1]])
       repl = which(sapply(combns,nchar)==0)
@@ -25,8 +25,10 @@ revpy = function(n,all=F,py=F){
       combns[sapply(combns,nchar)==0] <- matches
       paste0(combns,collapse='')
     })
+  return(n)
   }else{
-    lapply(n[todo],function(n_){
+    n_ = as.list(n)
+    n_[todo] = lapply(n[todo],function(n_){
       matches = regmatches(n_,gregexpr('\\{.*?\\}',n_))[[1]]
       combns = as.list(strsplit(n_,'\\{.*?\\}')[[1]])
       repl = which(sapply(combns,nchar)==0)
@@ -41,6 +43,7 @@ revpy = function(n,all=F,py=F){
         paste0(sapply(combns,'[[',1),collapse='')
       }
     })
+    return(n_)
   }
 }
 
