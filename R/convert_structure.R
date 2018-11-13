@@ -12,7 +12,11 @@
 ChStr2struct <- function(Chin.strs = "", sep = "_", parallel = FALSE, full=FALSE)
 {
   # Convert one string to four corner code
-  strlib = ifelse(full,str100lib,str1lib)
+  if(full){
+    strlib = str100lib
+  }else{
+    strlib = str1lib
+  }
 
   ChStr2struct <- function(Chin.str, strlib){
     Sys.setlocale(category = 'LC_ALL', locale = 'chs')

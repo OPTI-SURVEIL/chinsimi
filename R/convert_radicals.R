@@ -14,7 +14,11 @@
 ChStr2rad <- function(Chin.strs = "", sep = "_", parallel = FALSE, full=FALSE)
 {
   # Convert one string to four corner code
-  radlib = ifelse(full,rad100lib,rad1lib)
+  if(full){
+    radlib = rad100lib
+  }else{
+    radlib = rad1lib
+  }
 
   ChStr2rad <- function(Chin.str, radlib){
     Sys.setlocale(category = 'LC_ALL', locale = 'chs')
