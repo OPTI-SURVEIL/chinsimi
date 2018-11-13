@@ -5,13 +5,16 @@
 \title{Function to parse format used for storing character matches when original
 names are written partially in pinyin}
 \usage{
-revpy(n, all = F)
+revpy(n, all = F, py = F)
 }
 \arguments{
 \item{n}{A string or vector of strings. Should be Chinese names.}
 
 \item{all}{A logical indicator. If set to TRUE, all possible names are
 returned. If false, only the first character match is returned.}
+
+\item{py}{A logical indicator. If set to TRUE, the original pinyin element is
+returned instead of possible characters}
 }
 \value{
 A list of parsed names
@@ -23,5 +26,6 @@ names are written partially in pinyin
 \examples{
 #original name: chen1溜
 revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', all=F)
-revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', all=F)
+revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', all=T)
+revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', py=T)
 }
