@@ -11,7 +11,7 @@
 
 hancheck = function(n){ #returns true for names that are highly likely to be Han (i.e. start with one of 400 popular family names and have 2-4 characters total)
   n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
-
+  n = gsub('\\(.*?\\)','',n)
   nc = nchar(n)
   hn = substr(n,1,1) %in% hannames | substr(n,1,2) %in% hannames
 
