@@ -6,7 +6,7 @@
 #'  character substitutions, alternate names, or comments;
 
 paren_check = function(n){
-  n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
+  #n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
   inds = grep('[\\(.*?\\)]',n)
   inds = unique(c(inds,grep('[（）]',n)))
   1:length(n) %in% inds

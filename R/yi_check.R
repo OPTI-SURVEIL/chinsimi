@@ -5,7 +5,7 @@
 #'@details yi_check checks for commonly substituted Yi names
 
 yi_check = function(n){
-  n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
+  #n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
   inds = grep('赤黑',n)
   1:length(n) %in% inds
 }

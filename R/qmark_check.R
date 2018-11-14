@@ -6,7 +6,7 @@
 #'  place of an unknown character
 
 qmark_check = function(n){
-  n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
+  #n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
   inds = grep('[？?]',n)
   1:length(n) %in% inds
 }
