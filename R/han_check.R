@@ -13,7 +13,7 @@ hancheck = function(n){ #returns true for names that are highly likely to be Han
   #n[grep('\\{.*?\\}',n)] = unlist(revpy(n))
   n = gsub('\\(.*?\\)','',n)
   nc = nchar(n)
-  hn = substr(n,1,1) %in% hannames | substr(n,1,2) %in% hannames
+  hn = substr(n,1,1) %in% hannames$hannames | substr(n,1,2) %in% hannames$hannames
 
   hc = nc %in% c(2:4) & hn
   hc
