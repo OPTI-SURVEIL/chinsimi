@@ -19,7 +19,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',...){ #inputs may be strin
 
     if(any(c('data.frame','matrix') %in% class(s_1))){
       temp = lapply(1:ncol(s_1), function(c){
-        sim_ld(s_1[,c],s_2[,c])
+        sim_func(s_1[,c],s_2[,c])
       })
       temp = do.call(cbind,temp)
       return(apply(temp,1,match.fun(aggr)))
