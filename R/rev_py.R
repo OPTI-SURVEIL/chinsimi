@@ -45,7 +45,8 @@ revpy = function(n,all=F,py=F){
         paste0(sapply(combns,'[[',1),collapse='')
       }
     })
-    return(n_)
+    if(all) return(n_)
+    else return(unlist(n_))
   }
 }
 
