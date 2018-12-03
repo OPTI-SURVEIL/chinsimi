@@ -19,9 +19,9 @@ revpy = function(n,all=F,py=F){
   if(py){
     n[todo] = sapply(n[todo],function(n_){
       matches = regmatches(n_,gregexpr('\\{.*?\\}',n_))[[1]]
-      combns = as.list(strsplit(n_,'\\{.*?\\}')[[1]])
-      if(sum(sapply(combns,nchar)==0)==0) combns = c(combns,'')
-      repl = which(sapply(combns,nchar)==0)
+      temp = gsub('\\{.*?\\}',' ',n_)
+      combns = as.list(strsplit(temp,'')[[1]])
+      repl = which(combns==' ')
       matches = gsub('[[:punct:]]','',gsub('\\[.*?\\]','',matches))
       combns[sapply(combns,nchar)==0] <- matches
       paste0(combns,collapse='')
@@ -31,9 +31,9 @@ revpy = function(n,all=F,py=F){
     n_ = as.list(n)
     n_[todo] = lapply(n[todo],function(n_){
       matches = regmatches(n_,gregexpr('\\{.*?\\}',n_))[[1]]
-      combns = as.list(strsplit(n_,'\\{.*?\\}')[[1]])
-      if(sum(sapply(combns,nchar)==0)==0) combns = c(combns,'')
-      repl = which(sapply(combns,nchar)==0)
+      temp = gsub('\\{.*?\\}',' ',n_)
+      combns = as.list(strsplit(temp,'')[[1]])
+      repl = which(combns==' ')
       pymatches = regmatches(matches,gregexpr('\\[.*?\\]',matches))
       clist = lapply(pymatches, function(str) {
         gsub('\\[|\\]','',strsplit(str,',')[[1]])
