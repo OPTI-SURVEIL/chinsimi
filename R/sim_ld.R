@@ -24,14 +24,18 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',...){ #inputs may be strin
       temp = do.call(cbind,temp)
       return(apply(temp,1,match.fun(aggr)))
     }
+  res = rep(0,length(s_1))
+  blankinds = which(s_1 == '' | s_2 == '')
 
     hominds = which(pmax(grepl('\\[\\w+,\\w+\\]',s_1),grepl('\\[\\w+,\\w+\\]',s_2))==1)
     if(length(hominds)==0){
-      return(stringsim(s_1,s_2,method=method,...))
+      res = stringsim(s_1,s_2,method=method,...)
+      res[blankinds] = NA
+      return(res)
     }
     res = rep(0,length(s_1))
-
-    res[-hominds] = stringsim(s_1[-hominds],s_2[-hominds],method=method,...)
+    todoinds = 1:length(s_1)[-c(blankinds,hominds)]
+    res[todoinds] = stringsim(s_1[todoinds],s_2[todoinds],method=method,...)
 
     torun = do.call(rbind,lapply(hominds,function(i){
 
@@ -50,6 +54,6 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',...){ #inputs may be strin
     simtemp = stringsim(torun[,1],torun[,2],method=method,...)
 
     res[hominds] = tapply(simtemp,torun[,3],max)
-
+    res[blankinds] = NA
     return(res)
   }
