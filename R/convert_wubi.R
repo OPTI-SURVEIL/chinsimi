@@ -15,6 +15,7 @@ ChStr2wb <- function(Chin.strs = "", sep = "_", parallel = FALSE)
   ChStr2wb <- function(Chin.str, WBlib){
     OS = Sys.info()['sysname']
     switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+           Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
            Windows = Sys.setlocale(locale = 'chs'))
     Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
 

@@ -15,6 +15,7 @@ ChStr2fc <- function(Chin.strs = "", sep = "_", parallel = FALSE)
   ChStr2fc <- function(Chin.str, FClib){
     OS = Sys.info()['sysname']
     switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+           Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
            Windows = Sys.setlocale(locale = 'chs'))
     if(is.na(Chin.str)) return(NA)
     Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters

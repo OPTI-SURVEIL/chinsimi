@@ -19,6 +19,7 @@ ChStr2pyc <- function(Chin.strs = "", method = c("toneless", "tone"), multi = TR
   ChStr2py <- function(Chin.str, pylibnew){
     OS = Sys.info()['sysname']
     switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+           Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
            Windows = Sys.setlocale(locale = 'chs'))
     Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
 
