@@ -15,7 +15,7 @@
 #' @return A vector of similarities corresponding to the pairwise
 #'   comparisons of elements of s_1 and s_2
 
-sim_func <- function(s_1, s_2,aggr='mean',method='lv',...){ #inputs may be string vectors
+sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be string vectors
 
     if(any(c('data.frame','matrix') %in% class(s_1))){
       temp = lapply(1:ncol(s_1), function(c){
@@ -25,26 +25,26 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',...){ #inputs may be strin
       return(apply(temp,1,match.fun(aggr)))
     }
   res = rep(0,length(s_1))
-  blankinds = which(s_1 == '' | s_2 == '')
+  blankinds = which(nchar(s_1) < q | nchar(s_2)<q)
 
-    hominds = which(pmax(grepl('\\[\\w+,\\w+\\]',s_1),grepl('\\[\\w+,\\w+\\]',s_2))==1)
+  hominds = unique(grep('\\[\\w*,\\w*\\]',paste(s_1,s_2)))
     if(length(hominds)==0){
       res = stringsim(s_1,s_2,method=method,...)
       res[blankinds] = NA
       return(res)
     }
-    res = rep(0,length(s_1))
-    todoinds = 1:length(s_1)[-c(blankinds,hominds)]
+
+    todoinds = (1:length(s_1))[-c(blankinds,hominds)]
     res[todoinds] = stringsim(s_1[todoinds],s_2[todoinds],method=method,...)
 
     torun = do.call(rbind,lapply(hominds,function(i){
 
       v1 = s_1[i]
       v2 = s_2[i]
-      s1 = if(grepl('\\[\\w+,\\w+\\]',v1)){
+      s1 = if(grepl('\\[\\w*,\\w*\\]',v1)){
         homonym(v1)
       }else v1
-      s2 = if(grepl('\\[\\w+,\\w+\\]',v2)){
+      s2 = if(grepl('\\[\\w*,\\w*\\]',v2)){
         homonym(v2)
       }else v2
 
@@ -53,7 +53,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',...){ #inputs may be strin
 
     simtemp = stringsim(torun[,1],torun[,2],method=method,...)
 
-    res[hominds] = tapply(simtemp,torun[,3],max)
+    res[hominds] = tapply(simtemp,as.integer(torun[,3]),max)
     res[blankinds] = NA
     return(res)
   }
