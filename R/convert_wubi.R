@@ -13,7 +13,9 @@ ChStr2wb <- function(Chin.strs = "", sep = "_", parallel = FALSE)
 {
   # Convert one string to wubi code
   ChStr2wb <- function(Chin.str, WBlib){
-    Sys.setlocale(category = 'LC_ALL', locale = 'chs')
+    OS = Sys.info()['sysname']
+    switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+           Windows = Sys.setlocale(locale = 'chs'))
     Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
 
     # convert a single character to wubi code

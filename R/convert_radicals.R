@@ -21,7 +21,9 @@ ChStr2rad <- function(Chin.strs = "", sep = "_", parallel = FALSE, full=FALSE)
   }
 
   ChStr2rad <- function(Chin.str, radlib){
-    Sys.setlocale(category = 'LC_ALL', locale = 'chs')
+    OS = Sys.info()['sysname']
+    switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+           Windows = Sys.setlocale(locale = 'chs'))
     if(is.na(Chin.str)) return(NA)
     Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
 

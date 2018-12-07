@@ -17,8 +17,9 @@ ChStr2pyc <- function(Chin.strs = "", method = c("toneless", "tone"), multi = TR
 
   # Convert a string to pinyin
   ChStr2py <- function(Chin.str, pylibnew){
-    Sys.setlocale(category = 'LC_ALL', locale = 'chs')
-
+    OS = Sys.info()['sysname']
+    switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+           Windows = Sys.setlocale(locale = 'chs'))
     Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
 
     # convert a single character to pinyin
