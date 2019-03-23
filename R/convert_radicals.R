@@ -1,54 +1,46 @@
 #'Extract radical decomposition of Chinese Character strings.
 #'@param Chin.strs A vector of Chinese character strings
 #'@param sep Separating character to be placed between results for individual
-#'  Hanzi
-#'@param parallel option to run with parallel calculations
-#'@param full Boolean option to return either a single round of decomposition
-#'  (if F), or full character decomposition (if T)
+#'  Hanzi. Must be '_' or '' for proper functionality
+#'@param structure whether to append ideographic structure characters at the end of the string
+#'@param ... unused
 #'@return A vector of radical decomposition strings from the original input
 #'
 #'@examples
-#'ChStr2rad('凨冪',full=F)
-#'ChStr2rad('凨冪',full=T)
+#'ChStr2rad('凨冪',structure=F)
+#'ChStr2rad('凨冪',structure=T)
 
-ChStr2rad <- function(Chin.strs = "", sep = "_", parallel = FALSE, full=FALSE)
+ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....)
 {
-  # Convert one string to four corner code
-  if(full){
-    radlib = rad100lib
-  }else{
-    radlib = rad1lib
-  }
 
-  ChStr2rad <- function(Chin.str, radlib){
-    OS = Sys.info()['sysname']
-    switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
-           Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
-           Windows = Sys.setlocale(locale = 'chs'))
-    if(is.na(Chin.str)) return(NA)
-    Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
+  maxchar = max(nchar(Chin.strs))
 
-    # convert a single character to pinyin
-    ChChar2rad <- function(Chin.char){
-      ChCharrad <- radlib[[Chin.char]]
+  OS = Sys.info()['sysname']
+  switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+         Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+         Windows = Sys.setlocale(locale = 'chs'))
 
-      if(length(ChCharrad) == 0) ChCharrad = Chin.char
+  resmat1 = vector('list',length=maxchar)
+  if(structure) resmat2 = vector('list',length=maxchar)
 
-      return(ChCharrad)
+  for(i in 1:maxchar){
+    chars = substr(Chin.strs,i,i)
+    chars[chars == ''] <- '_'
+    resmat1[[i]] = unlist(mget(chars,rad100lib,ifnotfound = chars))
+    if(structure){
+
+      resmat2[[i]] = unlist(mget(chars,str1lib,ifnotfound = '*'))
+      resmat2[[i]][chars=='_'] = ''
     }
-
-    paste(sapply(Chin.char, ChChar2rad), collapse = sep)
   }
 
-  # Use parallel computing to convert strings if parallel is TRUE
-  if(parallel)
-  {
-    no_cores <- parallel::detectCores() - 1  # Get the number of available string
-    cl <- parallel::makeCluster(no_cores)   # Initiate cluster
-    rad <- parallel::parSapply(cl, X = Chin.strs, FUN = ChStr2rad, radlib)
-    parallel::stopCluster(cl)
-    return(rad)
-  } else {
-    sapply(Chin.strs, ChStr2rad, radlib)
+  res = do.call(paste,c(resmat1[1:length(resmat1)],sep=sep))
+  res = gsub('_+$','',res)
+
+  if(structure){
+    res2 = do.call(paste,c(resmat2[1:length(resmat2)],sep=sep))
+    res2 = gsub('_+$','',res2)
+    return(paste(res,res2,sep=sep))
   }
+  res
 }

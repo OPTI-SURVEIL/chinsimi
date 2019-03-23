@@ -17,6 +17,14 @@
 
 sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be string vectors
 
+  blankinds = which((nchar(s_1) + nchar(s_2)) == 0)
+
+  one_blankinds = which((nchar(s_1) + nchar(s_2)) != 0 & (nchar(s_1) * nchar(s_2)) == 0)
+
+  doinds = which((nchar(s_1) * nchar(s_2)) > 0)
+
+  if(method == 'jaccard'){s_1 = paste0('_',s_1,'_'); s_2 = paste0('_',s_2,'_')}
+
     if(any(c('data.frame','matrix') %in% class(s_1))){
       temp = lapply(1:ncol(s_1), function(c){
         sim_func(s_1[,c],s_2[,c])
@@ -25,17 +33,17 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
       return(apply(temp,1,match.fun(aggr)))
     }
   res = rep(0,length(s_1))
-  blankinds = which(nchar(s_1) < q | nchar(s_2)<q)
+
 
   hominds = unique(grep('\\[\\w*,\\w*\\]',paste(s_1,s_2)))
     if(length(hominds)==0){
-      res = stringsim(s_1,s_2,method=method,...)
+      res = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
       res[blankinds] = NA
+      res[one_blankinds] = 0
       return(res)
     }
-
-    todoinds = (1:length(s_1))[-c(blankinds,hominds)]
-    res[todoinds] = stringsim(s_1[todoinds],s_2[todoinds],method=method,...)
+    doinds = setdiff(doinds,hominds)
+    res[doinds] = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
 
     torun = do.call(rbind,lapply(hominds,function(i){
 
@@ -51,9 +59,10 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
       matrix(c(rep(s1,each=length(s2)),rep(s2,length(s1)),rep(i,length(s1)*length(s2))),ncol=3)
     }))
 
-    simtemp = stringsim(torun[,1],torun[,2],method=method,...)
+    simtemp = stringsim(torun[,1],torun[,2],method=method,q=q,...)
 
     res[hominds] = tapply(simtemp,as.integer(torun[,3]),max)
     res[blankinds] = NA
+    res[one_blankinds] = 0
     return(res)
   }

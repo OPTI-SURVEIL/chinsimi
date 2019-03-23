@@ -1,46 +1,32 @@
 #' Convert Chinese strings to four corner code.
 #'
-#' @param Chin.str The string need to be converted
-#' @param sep Character used to seperate different characters
-#' @param parallel Whether or not use parallel calculation
+#' @param Chin.strs The string need to be converted
+#' @param sep Character used to seperate different characters. With current programming, should only be '_' or ''
+#' @param ... Unused
 #' @return four corner code of \code{Chin.str}.
 #' @examples
 #' ChStr2fc(c("海上生明月","天涯共此时"))
 
 
 
-ChStr2fc <- function(Chin.strs = "", sep = "_", parallel = FALSE)
+ChStr2fc <- function(Chin.strs, sep = "_", parallel = FALSE,...)
 {
-  # Convert one string to four corner code
-  ChStr2fc <- function(Chin.str, FClib){
-    OS = Sys.info()['sysname']
-    switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
-           Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
-           Windows = Sys.setlocale(locale = 'chs'))
-    if(is.na(Chin.str)) return(NA)
-    Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
+  maxchar = max(nchar(Chin.strs))
 
-    # convert a single character to pinyin
-    ChChar2fc <- function(Chin.char){
-      ChCharfc <- FClib[[Chin.char]]
+  OS = Sys.info()['sysname']
+  switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+         Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+         Windows = Sys.setlocale(locale = 'chs'))
 
-      if(length(ChCharfc) == 0) ChCharfc = Chin.char
+  resmat = vector('list',length=maxchar)
 
-      return(ChCharfc)
-    }
-
-    paste(sapply(Chin.char, ChChar2fc), collapse = sep)
+  for(i in 1:maxchar){
+    chars = substr(Chin.strs,i,i)
+    chars[chars == ''] <- '_'
+    resmat[[i]] = unlist(mget(chars,FClib,ifnotfound = chars))
   }
 
-  # Use parallel computing to convert strings if parallel is TRUE
-  if(parallel)
-  {
-    no_cores <- parallel::detectCores() - 1  # Get the number of available string
-    cl <- parallel::makeCluster(no_cores)   # Initiate cluster
-    fccode <- parallel::parSapply(cl, X = Chin.strs, FUN = ChStr2fc, FClib)
-    parallel::stopCluster(cl)
-    return(fccode)
-  } else {
-    sapply(Chin.strs, ChStr2fc, FClib)
-  }
+  res = do.call(paste,c(resmat[1:length(resmat)],sep=sep))
+
+  gsub('_+$','',res)
 }

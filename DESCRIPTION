@@ -4,10 +4,11 @@ Title: Measuring the Similarity between Chinese Strings
 Version: 0.1.0
 Date: 2018-03-15
 Imports:
-  splitstackshape,
   data.table,
   parallel,
-    stringdist
+  splitstackshape,
+  stringdist,
+  stringr
 Authors: Qu Cheng
 Maintainer: Qu Cheng <qcheng@berkeley.edu>
 Description: This package is used to measure the similarity between Chinese characters. It can convert Chinese characters to pinyin (phonetic similarity) and four corner code (shape similarity), and then use different measurement method to assess the similarity between characters or strings.

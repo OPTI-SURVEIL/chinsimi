@@ -1,61 +1,43 @@
 #' Convert Chinese strings to pinyin.
 #'
 #' @param Chin.str The string need to be converted
-#' @param method Whether the output should be toned or toneless.
-#' @param multi Whether the output should contain more than one pinyin
-#' @param sep Character used to seperate different characters
-#' @param parallel Whether or not use parallel calculation
+#' @param tones Whether the output should be toned (T) or toneless.
+#' @param multi Whether the output should list multiple pinyins for characters with multiple pronunciations
+#' @param sep Character used to seperate different characters. Must be '' or '_' for proper operation
+#' @param ... Unused
 #' @return pinyin of \code{Chin.str}.
 #' @examples
 #' ChStr2py(c("海上生明月","天涯共此时"))
 
 
 
-ChStr2py <- function(Chin.strs = "", method = c("toneless", "tone"), multi = TRUE, sep = "_", parallel = FALSE)
+ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...)
 {
-  method <- match.arg(method)
 
-  # Convert a string to pinyin
-  ChStr2py <- function(Chin.str, pylib){
-    OS = Sys.info()['sysname']
-    switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
-           Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
-           Windows = Sys.setlocale(locale = 'chs'))
-    if(is.na(Chin.str)) return(NA)
-    Chin.char <- unlist(strsplit(Chin.str, split = "")) # divide the string to characters
+  maxchar = max(nchar(Chin.strs))
 
-    # convert a single character to pinyin
-    ChChar2Py <- function(Chin.char){
-      ChCharpy <- pylib[[Chin.char]]
+  OS = Sys.info()['sysname']
+  switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+         Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+         Windows = Sys.setlocale(locale = 'chs'))
 
-      if(length(ChCharpy)==0){
-        ChCharpy <- Chin.char
-      }else{
-        ChCharpy <- switch(method, tone = ChCharpy, toneless = gsub("[1-4]","", ChCharpy))
-        if(multi){
-          ChCharpy <- ifelse(grepl(",", ChCharpy), paste0("[", ChCharpy, "]"),  ChCharpy)
-        } else {
-          ChCharpy <- ifelse(grepl(",",ChCharpy), substr(ChCharpy, 1, gregexpr(pattern =',', ChCharpy)[[1]][1]-1), ChCharpy)
-        }
-      }
+  resmat = vector('list',length=maxchar)
 
-      return(ChCharpy)
+  for(i in 1:maxchar){
+    chars = substr(Chin.strs,i,i)
+    chars[chars == ''] <- '_'
+    resmat[[i]] = unlist(mget(chars,pylib,ifnotfound = chars))
+    if(!multi){
+      resmat[[i]] = gsub('[|,*$','',resmat[[i]])
     }
-
-    paste(sapply(Chin.char, ChChar2Py), collapse = sep)
   }
 
-  # Use parallel computing to convert strings if parallel is TRUE
-  if(parallel)
-  {
-    no_cores <- parallel::detectCores() - 1  # Get the number of available string
-    cl <- parallel::makeCluster(no_cores)   # Initiate cluster
-    pinyin <- parallel::parSapply(cl, X = Chin.strs, FUN = ChStr2py, pylib)
-    parallel::stopCluster(cl)
-    return(pinyin)
-  } else {
-    sapply(Chin.strs, ChStr2py, pylib)
-  }
+  res = do.call(paste,c(resmat[1:length(resmat)],sep=sep))
+
+  res = gsub('_+$','',res)
+
+  if(!tones) res = gsub('[1-5]','',res)
+  res
 
 }
 
