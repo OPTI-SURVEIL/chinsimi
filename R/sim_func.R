@@ -38,7 +38,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
 
   hominds = unique(grep('\\[\\w*,\\w*\\]',paste(s_1,s_2)))
     if(length(hominds)==0){
-      res = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
+      res[doinds] = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
       res[blankinds] = NA
       res[one_blankinds] = 0
       return(res)
