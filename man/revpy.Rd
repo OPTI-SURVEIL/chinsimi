@@ -24,8 +24,8 @@ Function to parse format used for storing character matches when original
 names are written partially in pinyin
 }
 \examples{
-#original name: chen1溜
-revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', all=F)
-revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', all=T)
-revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', py=T)
+#original name: chen1\\u6e9c
+revpy('{chen1,[\\u55d4,\\u8ac3,\\u741b,\\u8cdd,\\u8b13,\\u62bb,\\u90f4,\\u778b,\\u6375,\\u7628,\\u7e1d,\\u7d9d,\\u68fd]}\\u6e9c', all=F)
+revpy('{chen1,[\\u55d4,\\u8ac3,\\u741b,\\u8cdd,\\u8b13,\\u62bb,\\u90f4,\\u778b,\\u6375,\\u7628,\\u7e1d,\\u7d9d,\\u68fd]}\\u6e9c', all=T)
+revpy('{chen1,[\\u55d4,\\u8ac3,\\u741b,\\u8cdd,\\u8b13,\\u62bb,\\u90f4,\\u778b,\\u6375,\\u7628,\\u7e1d,\\u7d9d,\\u68fd]}\\u6e9c', py=T)
 }

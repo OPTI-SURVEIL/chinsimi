@@ -4,19 +4,17 @@
 \alias{ChStr2rad}
 \title{Extract radical decomposition of Chinese Character strings.}
 \usage{
-ChStr2rad(Chin.strs = "", sep = "_", parallel = FALSE,
-  full = FALSE)
+ChStr2rad(Chin.strs, sep = "", structure = FALSE, ....)
 }
 \arguments{
 \item{Chin.strs}{A vector of Chinese character strings}
 
 \item{sep}{Separating character to be placed between results for individual
-Hanzi}
+Hanzi. Must be '_' or '' for proper functionality}
 
-\item{parallel}{option to run with parallel calculations}
+\item{structure}{whether to append ideographic structure characters at the end of the string}
 
-\item{full}{Boolean option to return either a single round of decomposition
-(if F), or full character decomposition (if T)}
+\item{...}{unused}
 }
 \value{
 A vector of radical decomposition strings from the original input
@@ -25,6 +23,6 @@ A vector of radical decomposition strings from the original input
 Extract radical decomposition of Chinese Character strings.
 }
 \examples{
-ChStr2rad('凨冪',full=F)
-ChStr2rad('凨冪',full=T)
+ChStr2rad('\\u51e8\\u51aa',structure=F)
+ChStr2rad('\\u51e8\\u51aa',structure=T)
 }

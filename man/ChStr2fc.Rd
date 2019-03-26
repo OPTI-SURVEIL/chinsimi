@@ -4,14 +4,14 @@
 \alias{ChStr2fc}
 \title{Convert Chinese strings to four corner code.}
 \usage{
-ChStr2fc(Chin.strs = "", sep = "_", parallel = FALSE)
+ChStr2fc(Chin.strs, sep = "_", parallel = FALSE, ...)
 }
 \arguments{
-\item{sep}{Character used to seperate different characters}
+\item{Chin.strs}{The string need to be converted}
 
-\item{parallel}{Whether or not use parallel calculation}
+\item{sep}{Character used to seperate different characters. With current programming, should only be '_' or ''}
 
-\item{Chin.str}{The string need to be converted}
+\item{...}{Unused}
 }
 \value{
 four corner code of \code{Chin.str}.
@@ -20,5 +20,5 @@ four corner code of \code{Chin.str}.
 Convert Chinese strings to four corner code.
 }
 \examples{
-ChStr2fc(c("海上生明月","天涯共此时"))
+ChStr2fc(c("\\u6d77\\u4e0a\\u751f\\u660e\\u6708","\\u5929\\u6daf\\u5171\\u6b64\\u65f6"))
 }

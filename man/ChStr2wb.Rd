@@ -4,12 +4,12 @@
 \alias{ChStr2wb}
 \title{Convert Chinese strings to wubi code (based on radicals).}
 \usage{
-ChStr2wb(Chin.strs = "", sep = "_", parallel = FALSE)
+ChStr2wb(Chin.strs, sep = "_", ...)
 }
 \arguments{
-\item{sep}{Character used to seperate different characters}
+\item{sep}{Character used to seperate different characters, must be '_' or '' for proper functioning}
 
-\item{parallel}{Whether or not use parallel calculation}
+\item{...}{unused}
 
 \item{Chin.str}{The string need to be converted}
 }
@@ -20,5 +20,5 @@ wubi code of \code{Chin.str}.
 Convert Chinese strings to wubi code (based on radicals).
 }
 \examples{
-ChStr2wb(c("海上生明月1","天涯共此时"))
+ChStr2wb(c("\\u6d77\\u4e0a\\u751f\\u660e\\u67081","\\u5929\\u6daf\\u5171\\u6b64\\u65f6"))
 }
