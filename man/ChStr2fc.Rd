@@ -20,6 +20,3 @@ four corner code of \code{Chin.str}.
 \description{
 Convert Chinese strings to four corner code.
 }
-\examples{
-\dontrun{ChStr2fc("æµ·ä¸Šç”Ÿæ˜Žæœˆ")}
-}

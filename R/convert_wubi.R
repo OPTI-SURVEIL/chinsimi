@@ -5,8 +5,7 @@
 #' @param sep Character used to seperate different characters, must be '_' or '' for proper functioning
 #' @param ... unused
 #' @return wubi code of \code{Chin.str}.
-#' @examples
-#' \dontrun{ChStr2wb(c("海上生明月","天涯共此时"))}
+
 
 ChStr2wb <- function(Chin.strs, sep = "_", ...){
 

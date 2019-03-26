@@ -24,9 +24,3 @@ A list of parsed names
 Function to parse format used for storing character matches when original
 names are written partially in pinyin
 }
-\examples{
-#original name: chen1\\u6e9c
-\dontrun{revpy("{chen1,[å—”,è«ƒ,ç›,è³,è¬“,æŠ»,éƒ´,çž‹,æµ,ç˜¨,ç¸,ç¶,æ£½]}æºœ", all=F)}
-\dontrun{revpy("{chen1,[å—”,è«ƒ,ç›,è³,è¬“,æŠ»,éƒ´,çž‹,æµ,ç˜¨,ç¸,ç¶,æ£½]}æºœ", all=T)}
-\dontrun{revpy("{chen1,[å—”,è«ƒ,ç›,è³,è¬“,æŠ»,éƒ´,çž‹,æµ,ç˜¨,ç¸,ç¶,æ£½]}æºœ", py=T)}
-}

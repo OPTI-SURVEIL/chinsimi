@@ -8,11 +8,7 @@
 #'   returned instead of possible characters
 #' @return A list of parsed names
 #'
-#' @examples
-#' #original name: chen1\u6e9c
-#' \dontrun{revpy("{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜", all=F)}
-#' \dontrun{revpy("{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜", all=T)}
-#' \dontrun{revpy("{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜", py=T)}
+
 
 revpy = function(n,all=F,py=F){
   todo = grep('\\{.*?\\}',n)

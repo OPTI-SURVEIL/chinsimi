@@ -6,8 +6,7 @@
 #' @param sep Character used to seperate different characters. Must be '' or '_' for proper operation
 #' @param ... Unused
 #' @return pinyin of \code{Chin.str}.
-#' @examples
-#' \dontrun{ChStr2py(c("海上生明月","天涯共此时"))}
+
 
 ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...){
 

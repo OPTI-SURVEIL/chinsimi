@@ -7,9 +7,7 @@
 #'@param ... unused
 #'@return A vector of radical decomposition strings from the original input
 #'
-#'@examples
-#'\dontrun{ChStr2rad('凨冪',structure=F)}
-#'\dontrun{ChStr2rad('凨冪',structure=T)}
+
 
 ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
 

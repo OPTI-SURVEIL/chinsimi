@@ -20,6 +20,3 @@ wubi code of \code{Chin.str}.
 \description{
 Convert Chinese strings to wubi code (based on radicals).
 }
-\examples{
-\dontrun{ChStr2wb(c("æµ·ä¸Šç”Ÿæ˜Žæœˆ","å¤©æ¶¯å…±æ­¤æ—¶"))}
-}

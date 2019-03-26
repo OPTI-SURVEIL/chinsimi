@@ -4,8 +4,7 @@
 #' @param sep Character used to seperate different characters. With current programming, should only be '_' or ''
 #' @param ... Unused
 #' @return four corner code of \code{Chin.str}.
-#' @examples
-#' \dontrun{ChStr2fc("海上生明月")}
+
 
 ChStr2fc <- function(Chin.strs,sep = "_",...){
   maxchar = max(nchar(Chin.strs))

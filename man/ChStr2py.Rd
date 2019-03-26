@@ -24,6 +24,3 @@ pinyin of \code{Chin.str}.
 \description{
 Convert Chinese strings to pinyin.
 }
-\examples{
-\dontrun{ChStr2py(c("æµ·ä¸Šç”Ÿæ˜Žæœˆ","å¤©æ¶¯å…±æ­¤æ—¶"))}
-}
