@@ -8,8 +8,8 @@
 #'@return A vector of radical decomposition strings from the original input
 #'
 #'@examples
-#'ChStr2rad('\u51e8\u51aa',structure=F)
-#'ChStr2rad('\u51e8\u51aa',structure=T)
+#'\dontrun{ChStr2rad('凨冪',structure=F)}
+#'\dontrun{ChStr2rad('凨冪',structure=T)}
 
 ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
 

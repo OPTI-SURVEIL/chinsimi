@@ -8,11 +8,11 @@
 ChStr2wb(Chin.strs, sep = "_", ...)
 }
 \arguments{
+\item{Chin.strs}{The string need to be converted}
+
 \item{sep}{Character used to seperate different characters, must be '_' or '' for proper functioning}
 
 \item{...}{unused}
-
-\item{Chin.str}{The string need to be converted}
 }
 \value{
 wubi code of \code{Chin.str}.
@@ -21,5 +21,6 @@ wubi code of \code{Chin.str}.
 Convert Chinese strings to wubi code (based on radicals).
 }
 \examples{
-ChStr2wb(c("\\u6d77\\u4e0a\\u751f\\u660e\\u67081","\\u5929\\u6daf\\u5171\\u6b64\\u65f6"))
+\dontrun{ChStr2wb(c("f57d8
+gff","e$)f6/e1f-$f6"))}
 }

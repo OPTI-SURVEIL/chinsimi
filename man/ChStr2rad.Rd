@@ -24,6 +24,6 @@ A vector of radical decomposition strings from the original input
 Extract radical decomposition of Chinese Character strings.
 }
 \examples{
-ChStr2rad('\\u51e8\\u51aa',structure=F)
-ChStr2rad('\\u51e8\\u51aa',structure=T)
+\dontrun{ChStr2rad('e(e*',structure=F)}
+\dontrun{ChStr2rad('e(e*',structure=T)}
 }

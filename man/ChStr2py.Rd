@@ -8,6 +8,8 @@
 ChStr2py(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...)
 }
 \arguments{
+\item{Chin.strs}{The string need to be converted}
+
 \item{tones}{Whether the output should be toned (T) or toneless.}
 
 \item{multi}{Whether the output should list multiple pinyins for characters with multiple pronunciations}
@@ -15,8 +17,6 @@ ChStr2py(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...)
 \item{sep}{Character used to seperate different characters. Must be '' or '_' for proper operation}
 
 \item{...}{Unused}
-
-\item{Chin.str}{The string need to be converted}
 }
 \value{
 pinyin of \code{Chin.str}.
@@ -25,5 +25,6 @@ pinyin of \code{Chin.str}.
 Convert Chinese strings to pinyin.
 }
 \examples{
-ChStr2py(c("\\u6d77\\u4e0a\\u751f\\u660e\\u6708","\\u5929\\u6daf\\u5171\\u6b64\\u65f6"))
+\dontrun{ChStr2py(c("f57d8
+gff","e$)f6/e1f-$f6"))}
 }

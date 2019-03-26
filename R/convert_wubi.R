@@ -1,12 +1,12 @@
 #' Convert Chinese strings to wubi code (based on radicals).
 #'
 #'@encoding UTF-8
-#' @param Chin.str The string need to be converted
+#' @param Chin.strs The string need to be converted
 #' @param sep Character used to seperate different characters, must be '_' or '' for proper functioning
 #' @param ... unused
 #' @return wubi code of \code{Chin.str}.
 #' @examples
-#' ChStr2wb(c("\u6d77\u4e0a\u751f\u660e\u67081","\u5929\u6daf\u5171\u6b64\u65f6"))
+#' \dontrun{ChStr2wb(c("海上生明月","天涯共此时"))}
 
 ChStr2wb <- function(Chin.strs, sep = "_", ...){
 

@@ -18,6 +18,6 @@ Functions to indicate the presence of characters signalling uncertainty
 }
 \details{
 ambig_count counts for open-closed parentheses pairs,
-question marks, and strings such as "\u53c8\u540d" which may indicate that
+question marks, and strings such as "又名" which may indicate that
 ambiguous or multiple name information is included in the field;
 }

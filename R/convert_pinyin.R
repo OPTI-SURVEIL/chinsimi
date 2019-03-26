@@ -1,13 +1,13 @@
 #' Convert Chinese strings to pinyin.
 #' @encoding UTF-8
-#' @param Chin.str The string need to be converted
+#' @param Chin.strs The string need to be converted
 #' @param tones Whether the output should be toned (T) or toneless.
 #' @param multi Whether the output should list multiple pinyins for characters with multiple pronunciations
 #' @param sep Character used to seperate different characters. Must be '' or '_' for proper operation
 #' @param ... Unused
 #' @return pinyin of \code{Chin.str}.
 #' @examples
-#' ChStr2py(c("\u6d77\u4e0a\u751f\u660e\u6708","\u5929\u6daf\u5171\u6b64\u65f6"))
+#' \dontrun{ChStr2py(c("海上生明月","天涯共此时"))}
 
 ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...){
 

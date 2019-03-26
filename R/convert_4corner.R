@@ -5,9 +5,9 @@
 #' @param ... Unused
 #' @return four corner code of \code{Chin.str}.
 #' @examples
-#' ChStr2fc(c("\u6d77\u4e0a\u751f\u660e\u6708","\u5929\u6daf\u5171\u6b64\u65f6"))
+#' \dontrun{ChStr2fc("海上生明月")}
 
-ChStr2fc <- function(Chin.strs,sep = "_",parallel = FALSE,...){
+ChStr2fc <- function(Chin.strs,sep = "_",...){
   maxchar = max(nchar(Chin.strs))
 
   OS = Sys.info()['sysname']

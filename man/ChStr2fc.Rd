@@ -5,7 +5,7 @@
 \alias{ChStr2fc}
 \title{Convert Chinese strings to four corner code.}
 \usage{
-ChStr2fc(Chin.strs, sep = "_", parallel = FALSE, ...)
+ChStr2fc(Chin.strs, sep = "_", ...)
 }
 \arguments{
 \item{Chin.strs}{The string need to be converted}
@@ -21,5 +21,6 @@ four corner code of \code{Chin.str}.
 Convert Chinese strings to four corner code.
 }
 \examples{
-ChStr2fc(c("\\u6d77\\u4e0a\\u751f\\u660e\\u6708","\\u5929\\u6daf\\u5171\\u6b64\\u65f6"))
+\dontrun{ChStr2fc("f57d8
+gff")}
 }
