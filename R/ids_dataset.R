@@ -22,7 +22,7 @@
 #'  ids[[i]][is.na(ids[[i]])] <- ids[[i+1]][is.na(ids[[i]])]
 #'  ids[[i+1]][is.na(ids[[i]])] <- NA
 #'}
-#'
+#'@encoding UTF-8
 #'structchar = c("⿰", "⿱", "⿲", "⿳", "⿴", "⿵", "⿶", "⿷", "⿸", "⿹", "⿺", "⿻")
 #'ids = subset(ids, substr(Decomp,1,1) %in% structchar)
 #'nms = ids$Char

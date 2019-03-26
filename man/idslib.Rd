@@ -33,15 +33,5 @@ for(i in 1:length(todo)){
  ids[[i]][is.na(ids[[i]])] <- ids[[i+1]][is.na(ids[[i]])]
  ids[[i+1]][is.na(ids[[i]])] <- NA
 }
-
-structchar = c("⿰", "⿱", "⿲", "⿳", "⿴", "⿵", "⿶", "⿷", "⿸", "⿹", "⿺", "⿻")
-ids = subset(ids, substr(Decomp,1,1) %in% structchar)
-nms = ids$Char
-ids = lapply(1:length(nms),function(i){
- ids[i,2]
-})
-names(ids) = nms
-idslib = list2env(ids)
-save(idslib,file = 'data/idslib.rda')
 }
 \keyword{datasets}
