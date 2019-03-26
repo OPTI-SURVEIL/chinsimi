@@ -24,6 +24,6 @@ A vector of radical decomposition strings from the original input
 Extract radical decomposition of Chinese Character strings.
 }
 \examples{
-\dontrun{ChStr2rad('e(e*',structure=F)}
-\dontrun{ChStr2rad('e(e*',structure=T)}
+\dontrun{ChStr2rad('å‡¨å†ª',structure=F)}
+\dontrun{ChStr2rad('å‡¨å†ª',structure=T)}
 }

@@ -3,7 +3,7 @@
 #'@param n A string or vector of strings. Should be Chinese names.
 #'@return An integer vector of the same length as n
 #'@details ambig_count counts for open-closed parentheses pairs,
-#'question marks, and strings such as "又名" which may indicate that
+#'question marks, and strings such as "You ming" which may indicate that
 #'ambiguous or multiple name information is included in the field;
 
 ambig_count = function(n) {

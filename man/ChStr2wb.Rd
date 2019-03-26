@@ -21,6 +21,5 @@ wubi code of \code{Chin.str}.
 Convert Chinese strings to wubi code (based on radicals).
 }
 \examples{
-\dontrun{ChStr2wb(c("f57d8
-gff","e$)f6/e1f-$f6"))}
+\dontrun{ChStr2wb(c("æµ·ä¸Šç”Ÿæ˜Žæœˆ","å¤©æ¶¯å…±æ­¤æ—¶"))}
 }

@@ -26,10 +26,7 @@ names are written partially in pinyin
 }
 \examples{
 #original name: chen1\\u6e9c
-\dontrun{revpy("{chen1,[e,h+,g,h3,h,,f
-;,i4,g,f5,g(,g8,g6,f#=]}f:", all=F)}
-\dontrun{revpy("{chen1,[e,h+,g,h3,h,,f
-;,i4,g,f5,g(,g8,g6,f#=]}f:", all=T)}
-\dontrun{revpy("{chen1,[e,h+,g,h3,h,,f
-;,i4,g,f5,g(,g8,g6,f#=]}f:", py=T)}
+\dontrun{revpy("{chen1,[å—”,è«ƒ,ç›,è³,è¬“,æŠ»,éƒ´,çž‹,æµ,ç˜¨,ç¸,ç¶,æ£½]}æºœ", all=F)}
+\dontrun{revpy("{chen1,[å—”,è«ƒ,ç›,è³,è¬“,æŠ»,éƒ´,çž‹,æµ,ç˜¨,ç¸,ç¶,æ£½]}æºœ", all=T)}
+\dontrun{revpy("{chen1,[å—”,è«ƒ,ç›,è³,è¬“,æŠ»,éƒ´,çž‹,æµ,ç˜¨,ç¸,ç¶,æ£½]}æºœ", py=T)}
 }

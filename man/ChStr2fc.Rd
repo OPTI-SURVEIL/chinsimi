@@ -21,6 +21,5 @@ four corner code of \code{Chin.str}.
 Convert Chinese strings to four corner code.
 }
 \examples{
-\dontrun{ChStr2fc("f57d8
-gff")}
+\dontrun{ChStr2fc("æµ·ä¸Šç”Ÿæ˜Žæœˆ")}
 }

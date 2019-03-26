@@ -25,6 +25,5 @@ pinyin of \code{Chin.str}.
 Convert Chinese strings to pinyin.
 }
 \examples{
-\dontrun{ChStr2py(c("f57d8
-gff","e$)f6/e1f-$f6"))}
+\dontrun{ChStr2py(c("æµ·ä¸Šç”Ÿæ˜Žæœˆ","å¤©æ¶¯å…±æ­¤æ—¶"))}
 }
