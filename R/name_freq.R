@@ -1,7 +1,7 @@
 #'Functions to calculate empirical relative frequency of observed name components. Used to infer the rarity of observed name patterns for matching.
 #'
 #'@param n A string or vector of strings. Should be Chinese names.
-#'@param refdata Dataset from which to calculate name component frequencies; can be a precalculated lookup table or a raw vector (will add overhead to repeated computations)
+#'@param refdata Dataset from which to calculate name component frequencies; can be a precalculated lookup table or a raw vector of names (will add overhead to repeated computations)
 #'@param start initial index of name substring on which to get frequencies
 #'@param end final index of name substring on which to get frequencies
 #'@param log logical: whether to return log relative frequency
@@ -45,7 +45,7 @@ name_freq = function(n,refdata,start = 1,end = 9999, log = T){
   res[is.na(ns)] = NA
   res[!is.na(ns)] = unlist(mget(ns[!is.na(ns)], refdata, ifnotfound = 0))
 
-  ifelse(log,log(res),res)
+  if(log) log(res) else res
 }
 
 name_freq_compare = function(n1,n2,refdata,start = 1,end = 9999, log = T){
@@ -69,7 +69,7 @@ name_freq_compare = function(n1,n2,refdata,start = 1,end = 9999, log = T){
 
   res[doinds] = unlist(mget(ns1[doinds], refdata, ifnotfound = 0))
 
-  ifelse(log,log(res),res)
+  if(log) log(res) else res
 }
 
 
