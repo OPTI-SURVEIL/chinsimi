@@ -16,4 +16,6 @@
 #' @examples
 #' data(FClib)
 #'
+
 "FClib"
+

@@ -9,19 +9,16 @@
       if(!grepl('\\[',s)) return(s)
       s. = unlist(strsplit(s,'\\[|\\]'))
       s. = s.[nchar(s.)>0]
-      
       hinds = grep(',',s.)
       ambs = s.[hinds]
       dinds = (1:length(s.))[-hinds]
       ncomb = 2^length(hinds)
-      
-      stabs = matrix(rep(s.,ncomb),nrow=ncomb,byrow = T) 
-      
+      stabs = matrix(rep(s.,ncomb),nrow=ncomb,byrow = T)
       for(i in 1:length(hinds)){
         ind = hinds[i]
         s. = unlist(strsplit(ambs[i],','))
         stabs[,ind] = rep(rep(s., each = ncomb/2^(i)),2^(i-1))
       }
-      
       apply(stabs,1,paste0,collapse='')
     }
+

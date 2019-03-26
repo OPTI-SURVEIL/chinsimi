@@ -33,5 +33,8 @@ name_freq = function(n,refdata,start = 1,end = 9999, log = T){
   res[!is.na(ns)] = unlist(mget(ns[!is.na(ns)], refdata, ifnotfound = 0))
 
   res
+
 }
+
+
 

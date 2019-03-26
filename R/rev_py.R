@@ -9,10 +9,10 @@
 #' @return A list of parsed names
 #'
 #' @examples
-#' #original name: chen1溜
-#' revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', all=F)
-#' revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', all=T)
-#' revpy('{chen1,[嗔,諃,琛,賝,謓,抻,郴,瞋,捵,瘨,縝,綝,棽]}溜', py=T)
+#' #original name: chen1\u6e9c
+#' revpy('{chen1,[\u55d4,\u8ac3,\u741b,\u8cdd,\u8b13,\u62bb,\u90f4,\u778b,\u6375,\u7628,\u7e1d,\u7d9d,\u68fd]}\u6e9c', all=F)
+#' revpy('{chen1,[\u55d4,\u8ac3,\u741b,\u8cdd,\u8b13,\u62bb,\u90f4,\u778b,\u6375,\u7628,\u7e1d,\u7d9d,\u68fd]}\u6e9c', all=T)
+#' revpy('{chen1,[\u55d4,\u8ac3,\u741b,\u8cdd,\u8b13,\u62bb,\u90f4,\u778b,\u6375,\u7628,\u7e1d,\u7d9d,\u68fd]}\u6e9c', py=T)
 
 revpy = function(n,all=F,py=F){
   todo = grep('\\{.*?\\}',n)
@@ -25,9 +25,10 @@ revpy = function(n,all=F,py=F){
       matches = gsub('[[:punct:]]','',gsub('\\[.*?\\]','',matches))
       combns[sapply(combns,nchar)==0] <- matches
       paste0(combns,collapse='')
-    })
+  })
   return(n)
   }else{
+
     n_ = as.list(n)
     n_[todo] = lapply(n[todo],function(n_){
       matches = regmatches(n_,gregexpr('\\{.*?\\}',n_))[[1]]
@@ -39,9 +40,9 @@ revpy = function(n,all=F,py=F){
         gsub('\\[|\\]','',strsplit(str,',')[[1]])
       })
       combns[repl] = clist
-      if(all){
+    if(all){
         apply(expand.grid(combns),1,paste0,collapse='')
-      }else{
+    }else{
         paste0(sapply(combns,'[[',1),collapse='')
       }
     })
@@ -49,4 +50,6 @@ revpy = function(n,all=F,py=F){
     else return(unlist(n_))
   }
 }
+
+
 

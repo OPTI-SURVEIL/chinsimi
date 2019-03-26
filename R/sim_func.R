@@ -29,11 +29,12 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
       temp = lapply(1:ncol(s_1), function(c){
         sim_func(s_1[,c],s_2[,c])
       })
+
       temp = do.call(cbind,temp)
       return(apply(temp,1,match.fun(aggr)))
     }
-  res = rep(0,length(s_1))
 
+  res = rep(0,length(s_1))
 
   hominds = unique(grep('\\[\\w*,\\w*\\]',paste(s_1,s_2)))
     if(length(hominds)==0){
@@ -49,20 +50,22 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
 
       v1 = s_1[i]
       v2 = s_2[i]
+
       s1 = if(grepl('\\[\\w*,\\w*\\]',v1)){
         homonym(v1)
       }else v1
       s2 = if(grepl('\\[\\w*,\\w*\\]',v2)){
         homonym(v2)
       }else v2
-
       matrix(c(rep(s1,each=length(s2)),rep(s2,length(s1)),rep(i,length(s1)*length(s2))),ncol=3)
     }))
-
     simtemp = stringsim(torun[,1],torun[,2],method=method,q=q,...)
 
     res[hominds] = tapply(simtemp,as.integer(torun[,3]),max)
     res[blankinds] = NA
     res[one_blankinds] = 0
+
     return(res)
+
   }
+

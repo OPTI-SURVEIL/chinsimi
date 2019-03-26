@@ -7,15 +7,11 @@
 #' @param ... Unused
 #' @return pinyin of \code{Chin.str}.
 #' @examples
-#' ChStr2py(c("海上生明月","天涯共此时"))
+#' ChStr2py(c("\u6d77\u4e0a\u751f\u660e\u6708","\u5929\u6daf\u5171\u6b64\u65f6"))
 
+ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...){
 
-
-ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...)
-{
-
-  maxchar = max(nchar(Chin.strs))
-
+    maxchar = max(nchar(Chin.strs))
   OS = Sys.info()['sysname']
   switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
          Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
@@ -37,9 +33,13 @@ ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...)
   res = gsub('_+$','',res)
 
   if(!tones) res = gsub('[1-5]','',res)
-  res
 
+  res
 }
+
+
+
+
 
 
 

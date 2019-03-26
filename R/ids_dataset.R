@@ -23,14 +23,16 @@
 #'  ids[[i+1]][is.na(ids[[i]])] <- NA
 #'}
 #'
-#'structchar = c('⿰','⿱','⿲','⿳','⿴','⿵','⿶','⿷','⿸','⿹','⿺','⿻')
+#'structchar = c('\u2ff0','\u2ff1','\u2ff2','\u2ff3','\u2ff4','\u2ff5','\u2ff6','\u2ff7','\u2ff8','\u2ff9','\u2ffa','\u2ffb')
 #'ids = subset(ids, substr(Decomp,1,1) %in% structchar)
 #'nms = ids$Char
 #'ids = lapply(1:length(nms),function(i){
 #'  ids[i,2]
 #'})
+
 #'names(ids) = nms
 #'idslib = list2env(ids)
 #'save(idslib,file = 'data/idslib.rda')
 
 "idslib"
+

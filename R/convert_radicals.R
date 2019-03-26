@@ -7,14 +7,12 @@
 #'@return A vector of radical decomposition strings from the original input
 #'
 #'@examples
-#'ChStr2rad('凨冪',structure=F)
-#'ChStr2rad('凨冪',structure=T)
+#'ChStr2rad('\u51e8\u51aa',structure=F)
+#'ChStr2rad('\u51e8\u51aa',structure=T)
 
-ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....)
-{
+ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
 
   maxchar = max(nchar(Chin.strs))
-
   OS = Sys.info()['sysname']
   switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
          Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
@@ -23,12 +21,11 @@ ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....)
   resmat1 = vector('list',length=maxchar)
   if(structure) resmat2 = vector('list',length=maxchar)
 
-  for(i in 1:maxchar){
+    for(i in 1:maxchar){
     chars = substr(Chin.strs,i,i)
     chars[chars == ''] <- '_'
     resmat1[[i]] = unlist(mget(chars,rad100lib,ifnotfound = chars))
     if(structure){
-
       resmat2[[i]] = unlist(mget(chars,str1lib,ifnotfound = '*'))
       resmat2[[i]][chars=='_'] = ''
     }
@@ -44,3 +41,4 @@ ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....)
   }
   res
 }
+

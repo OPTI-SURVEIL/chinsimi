@@ -7,22 +7,22 @@
 #'  structure of the input characters, processed through at most \code{times}
 #'  rounds of decomposition
 #'@examples
-#'ids2struct('凨冪',1)
-#'ids2rad('凨冪',2)
+#'ids2struct('\u51e8\u51aa',1)
+#'ids2rad('\u51e8\u51aa',2)
 
-# strchar = c('⿰','⿱','⿲','⿳','⿴','⿵','⿶','⿷','⿸','⿹','⿺','⿻')
+# strchar = c('\u2ff0','\u2ff1','\u2ff2','\u2ff3','\u2ff4','\u2ff5','\u2ff6','\u2ff7','\u2ff8','\u2ff9','\u2ffa','\u2ffb')
 #
 # structget = function(string){
-#   matches = gregexpr('[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻].*[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]|[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]',string)
+#   matches = gregexpr('[\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb].*[\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb]|[\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb]',string)
 #   res = regmatches(string,matches)
-#   res = gsub('[^⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]','+',res)
+#   res = gsub('[^\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb]','+',res)
 #   res
 # }
 #
 # radget = function(string){
-#   matches = gregexpr('[^⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻].*[^⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]|[^⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]',string)
+#   matches = gregexpr('[^\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb].*[^\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb]|[^\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb]',string)
 #   res = regmatches(string,matches)
-#   res = gsub('[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]','+',res)
+#   res = gsub('[\u2ff0\u2ff1\u2ff2\u2ff3\u2ff4\u2ff5\u2ff6\u2ff7\u2ff8\u2ff9\u2ffa\u2ffb]','+',res)
 #   res
 # }
 #
@@ -123,3 +123,4 @@
 #   print(c/length(chars))
 #   ids2rad(chars[c],100)
 # }
+
