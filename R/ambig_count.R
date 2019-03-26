@@ -1,5 +1,5 @@
 #'Functions to indicate the presence of characters signalling uncertainty
-#'
+#'@encoding UTF-8
 #'@param n A string or vector of strings. Should be Chinese names.
 #'@return An integer vector of the same length as n
 #'@details ambig_count counts for open-closed parentheses pairs,

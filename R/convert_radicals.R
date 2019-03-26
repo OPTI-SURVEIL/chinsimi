@@ -1,4 +1,5 @@
 #'Extract radical decomposition of Chinese Character strings.
+#'@encoding UTF-8
 #'@param Chin.strs A vector of Chinese character strings
 #'@param sep Separating character to be placed between results for individual
 #'  Hanzi. Must be '_' or '' for proper functionality

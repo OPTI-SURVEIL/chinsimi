@@ -1,5 +1,6 @@
 #' Convert Chinese strings to wubi code (based on radicals).
 #'
+#'@encoding UTF-8
 #' @param Chin.str The string need to be converted
 #' @param sep Character used to seperate different characters, must be '_' or '' for proper functioning
 #' @param ... unused

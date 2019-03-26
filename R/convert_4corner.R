@@ -1,5 +1,5 @@
 #' Convert Chinese strings to four corner code.
-#'
+#' @encoding UTF-8
 #' @param Chin.strs The string need to be converted
 #' @param sep Character used to seperate different characters. With current programming, should only be '_' or ''
 #' @param ... Unused

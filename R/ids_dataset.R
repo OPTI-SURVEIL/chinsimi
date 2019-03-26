@@ -1,7 +1,7 @@
 #'Character decomposition dataset
 #'
 #'@source https://github.com/cjkvi/cjkvi-ids/blob/master/ids.txt
-#'
+#'@encoding UTF-8
 #'@description processed with the following code:
 #'ids = read_csv('C:/Users/phil_collender/Documents/bleh/RLpaper/RLmanuscript/ids.csv')
 #'ids = subset(ids, Char %in% names(pylib))

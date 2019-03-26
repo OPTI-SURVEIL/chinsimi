@@ -1,5 +1,5 @@
 #' Convert Chinese strings to pinyin.
-#'
+#' @encoding UTF-8
 #' @param Chin.str The string need to be converted
 #' @param tones Whether the output should be toned (T) or toneless.
 #' @param multi Whether the output should list multiple pinyins for characters with multiple pronunciations
