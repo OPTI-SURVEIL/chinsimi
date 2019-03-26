@@ -33,7 +33,7 @@ for(i in 1:length(todo)){
  ids[[i]][is.na(ids[[i]])] <- ids[[i+1]][is.na(ids[[i]])]
  ids[[i+1]][is.na(ids[[i]])] <- NA
 }
-#structchar = c("⿰", "⿱", "⿲", "⿳", "⿴", "⿵", "⿶", "⿷", "⿸", "⿹", "⿺", "⿻")
+#structchar = c('ids structure characters here, but non ASCII characters break everything *smack')
 ids = subset(ids, substr(Decomp,1,1) %in% structchar)
 nms = ids$Char
 ids = lapply(1:length(nms),function(i){
