@@ -42,7 +42,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
       res[blankinds] = NA
       res[one_blankinds] = 0
       if(method == 'lcs'){
-        res = res * pmax(nchar(s_1),nchar(s_2)) / pmin(nchar(s_1),nchar(s_2))
+        res = res * (nchar(s_1)+nchar(s_2))/2 / pmin(nchar(s_1),nchar(s_2))
       } #redefine denominator to be maximum shared string length(i.e. shorter of two strings)
       return(res)
     }
@@ -69,7 +69,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
     res[one_blankinds] = 0
 
     if(method == 'lcs'){
-      res = res * pmax(nchar(s_1),nchar(s_2)) / pmin(nchar(s_1),nchar(s_2))
+      res = res * (nchar(s_1)+nchar(s_2))/2 / pmin(nchar(s_1),nchar(s_2))
     } #redefine denominator to be maximum shared string length(i.e. shorter of two strings)
 
     return(res)
