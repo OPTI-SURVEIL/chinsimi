@@ -12,8 +12,8 @@ ChStr2wb <- function(Chin.strs, sep = "_", ...){
   maxchar = max(nchar(Chin.strs))
 
   OS = Sys.info()['sysname']
-  switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
-         Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+  switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
+         Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
          Windows = Sys.setlocale(locale = 'chs'))
 
   resmat = vector('list',length=maxchar)
