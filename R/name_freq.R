@@ -72,4 +72,14 @@ name_freq_compare = function(n1,n2,refdata,start = 1,end = 9999, log = T){
 }
 
 
+unic_conv = function(fname){
+  eval(parse(text = paste0('data(', fname,')')))
+  data = eval(parse(text = fname))
+  nms = names(data)
+  nms = iconv(nms,'GBK','UTF-8')
+  data = as.list(data)
+  names(data) = nms
+  eval(parse(text = paste0(fname, ' = list2env(data)')))
+  eval(parse(text = paste0('save(',fname,paste0(',file="data/',fname,'.rda")'))))
+}
 
