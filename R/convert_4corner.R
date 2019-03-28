@@ -9,18 +9,23 @@
 ChStr2fc <- function(Chin.strs,sep = "_",...){
   maxchar = max(nchar(Chin.strs))
 
-  OS = Sys.info()['sysname']
-  switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Windows = Sys.setlocale(locale = 'chs'))
+  enc = Encoding(Chin.strs)
+  if(!all(enc == 'UTF-8')) Chin.strs = enc2utf8(Chin.strs)
+  # OS = Sys.info()['sysname']
+  # switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Windows = Sys.setlocale(locale = 'chs'))
 
   resmat = vector('list', length = maxchar)
 
     for (i in 1:maxchar) {
     chars = substr(Chin.strs, i, i)
     chars[chars == ''] <- '_'
-    resmat[[i]] = unlist(mget(chars, FClib, ifnotfound = chars))
+    chars_ = substr(stringi::stri_escape_unicode(chars),2,999)
+
+    resmat[[i]] = unlist(mget(chars_, FClib, ifnotfound = chars))
   }
   res = do.call(paste, c(resmat[1:length(resmat)], sep = sep))
   gsub('_+$', '', res)
 }
+

@@ -12,12 +12,24 @@
 #'name_freq_compare() compares two lists of names given substrings and a lookup table
 
 name_freq_table = function(refdata,start = 1, end= 9999){
-  OS = Sys.info()['sysname']
-  switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Windows = Sys.setlocale(locale = 'chs'))
+  # OS = Sys.info()['sysname']
+  # switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Windows = Sys.setlocale(locale = 'chs'))
+
+  if(any(class(refdata) == 'environment')){
+    enc = Encoding(names(refdata))
+    if(!all(enc == 'UTF-8')){
+      nms = enc2utf8(names(refdata))
+      refdata= as.list(refdata)
+      names(refdata) = nms
+      refdata = list2env(refdata)
+    }
+  }
 
   if(!any(class(refdata) == 'environment')){
+    enc = Encoding(refdata)
+    if(!all(enc == 'UTF-8')) refdata = enc2utf8(refdata)
     ns = substr(refdata,start,end)
     ns[nchar(ns)==0] = NA
     refdata = table(ns)
@@ -31,10 +43,21 @@ name_freq_table = function(refdata,start = 1, end= 9999){
 
 name_freq = function(n,refdata,start = 1,end = 9999, log = T){
 
-  OS = Sys.info()['sysname']
-  switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Windows = Sys.setlocale(locale = 'chs'))
+  # OS = Sys.info()['sysname']
+  # switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Windows = Sys.setlocale(locale = 'chs'))
+
+  if(any(class(refdata) == 'environment')){
+    enc = Encoding(names(refdata))
+    if(!all(enc == 'UTF-8')){
+      nms = enc2utf8(names(refdata))
+      refdata= as.list(refdata)
+      names(refdata) = nms
+      refdata = list2env(refdata)
+    }
+  }
+
   if(!any(class(refdata) == 'environment')) refdata = name_freq_table(refdata, start, end)
 
   ns = substr(n,start,end)
@@ -49,10 +72,20 @@ name_freq = function(n,refdata,start = 1,end = 9999, log = T){
 
 name_freq_compare = function(n1,n2,refdata,start = 1,end = 9999, log = T){
 
-  OS = Sys.info()['sysname']
-  switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Windows = Sys.setlocale(locale = 'chs'))
+  # OS = Sys.info()['sysname']
+  # switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Windows = Sys.setlocale(locale = 'chs'))
+
+  if(any(class(refdata) == 'environment')){
+    enc = Encoding(names(refdata))
+    if(!all(enc == 'UTF-8')){
+      nms = enc2utf8(names(refdata))
+      refdata= as.list(refdata)
+      names(refdata) = nms
+      refdata = list2env(refdata)
+    }
+  }
 
   if(!any(class(refdata) == 'environment')) refdata = name_freq_table(refdata, start, end)
 
@@ -71,15 +104,4 @@ name_freq_compare = function(n1,n2,refdata,start = 1,end = 9999, log = T){
   if(log) log(res) else res
 }
 
-
-unic_conv = function(fname){
-  eval(parse(text = paste0('data(', fname,')')))
-  data = eval(parse(text = fname))
-  nms = names(data)
-  nms = iconv(nms,'GBK','UTF-8')
-  data = as.list(data)
-  names(data) = nms
-  eval(parse(text = paste0(fname, ' = list2env(data)')))
-  eval(parse(text = paste0('save(',fname,paste0(',file="data/',fname,'.rda")'))))
-}
 

@@ -1,6 +1,6 @@
 #' Convert Chinese strings to pinyin.
 #' @encoding UTF-8
-#' @param Chin.strs The string need to be converted
+#' @param Chin.strs The string need to be converted. Note, it should have a declared encoding, preferably UTF-8
 #' @param tones Whether the output should be toned (T) or toneless.
 #' @param multi Whether the output should list multiple pinyins for characters with multiple pronunciations
 #' @param sep Character used to seperate different characters. Must be '' or '_' for proper operation
@@ -11,10 +11,14 @@
 ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...){
 
     maxchar = max(nchar(Chin.strs))
-  OS = Sys.info()['sysname']
-  switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Windows = Sys.setlocale(locale = 'chs'))
+    enc = Encoding(Chin.strs)
+
+    if(!all(enc == 'UTF-8')) Chin.strs = enc2utf8(Chin.strs)
+
+  # OS = Sys.info()['sysname']
+  # switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Windows = Sys.setlocale(locale = 'chs'))
 
 
   resmat = vector('list',length=maxchar)
@@ -22,7 +26,8 @@ ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...){
   for(i in 1:maxchar){
     chars = substr(Chin.strs,i,i)
     chars[chars == ''] <- '_'
-    resmat[[i]] = unlist(mget(chars,pylib,ifnotfound = chars))
+    chars_ = substr(stringi::stri_escape_unicode(chars),2,999)
+    resmat[[i]] = unlist(mget(chars_,pylib,ifnotfound = chars))
     if(!multi){
       resmat[[i]] = gsub('[|,*$','',resmat[[i]])
     }

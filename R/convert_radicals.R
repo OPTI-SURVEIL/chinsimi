@@ -12,10 +12,14 @@
 ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
 
   maxchar = max(nchar(Chin.strs))
-  OS = Sys.info()['sysname']
-  switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
-         Windows = Sys.setlocale(locale = 'chs'))
+  #OS = Sys.info()['sysname']
+
+  enc = Encoding(Chin.strs)
+
+  if(!all(enc == 'UTF-8')) Chin.strs = enc2utf8(Chin.strs)
+  # switch(OS, Linux = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
+  #        Windows = Sys.setlocale(locale = 'chs'))
 
 
   resmat1 = vector('list',length=maxchar)
@@ -24,9 +28,10 @@ ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
     for(i in 1:maxchar){
     chars = substr(Chin.strs,i,i)
     chars[chars == ''] <- '_'
-    resmat1[[i]] = unlist(mget(chars,rad100lib,ifnotfound = chars))
+    chars_ = substr(stringi::stri_escape_unicode(chars),2,999)
+    resmat1[[i]] = unlist(mget(chars_,rad100lib,ifnotfound = chars))
     if(structure){
-      resmat2[[i]] = unlist(mget(chars,str1lib,ifnotfound = '*'))
+      resmat2[[i]] = unlist(mget(chars_,str1lib,ifnotfound = '*'))
       resmat2[[i]][chars=='_'] = ''
     }
   }
@@ -41,4 +46,5 @@ ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
   }
   res
 }
+
 

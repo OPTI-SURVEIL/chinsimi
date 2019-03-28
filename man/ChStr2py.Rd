@@ -8,7 +8,7 @@
 ChStr2py(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...)
 }
 \arguments{
-\item{Chin.strs}{The string need to be converted}
+\item{Chin.strs}{The string need to be converted. Note, it should have a declared encoding, preferably UTF-8}
 
 \item{tones}{Whether the output should be toned (T) or toneless.}
 
