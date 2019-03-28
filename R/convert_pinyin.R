@@ -27,6 +27,7 @@ ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...){
     chars = substr(Chin.strs,i,i)
     chars[chars == ''] <- '_'
     chars_ = substr(stringi::stri_escape_unicode(chars),2,999)
+    chars_[nchar(chars_) == 0] = '_'
     resmat[[i]] = unlist(mget(chars_,pylib,ifnotfound = chars))
     if(!multi){
       resmat[[i]] = gsub('[|,*$','',resmat[[i]])

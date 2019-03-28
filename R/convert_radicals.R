@@ -29,6 +29,7 @@ ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
     chars = substr(Chin.strs,i,i)
     chars[chars == ''] <- '_'
     chars_ = substr(stringi::stri_escape_unicode(chars),2,999)
+    chars_[nchar(chars_) == 0] = '_'
     resmat1[[i]] = unlist(mget(chars_,rad100lib,ifnotfound = chars))
     if(structure){
       resmat2[[i]] = unlist(mget(chars_,str1lib,ifnotfound = '*'))

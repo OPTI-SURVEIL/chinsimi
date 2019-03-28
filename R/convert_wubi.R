@@ -22,6 +22,7 @@ ChStr2wb <- function(Chin.strs, sep = "_", ...){
   for(i in 1:maxchar){
     chars = substr(Chin.strs,i,i)
     chars_ = substr(stringi::stri_escape_unicode(chars),2,999)
+    chars_[nchar(chars_) == 0] = '_'
     resmat[[i]] = unlist(mget(chars_,WBlib,ifnotfound = chars))
   }
   res = do.call(paste,c(resmat[1:length(resmat)],sep=sep))
