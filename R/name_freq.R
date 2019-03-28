@@ -17,15 +17,15 @@ name_freq_table = function(refdata,start = 1, end= 9999){
   #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
   #        Windows = Sys.setlocale(locale = 'chs'))
 
-  if(any(class(refdata) == 'environment')){
-    enc = Encoding(names(refdata))
-    if(!all(enc == 'UTF-8')){
-      nms = enc2utf8(names(refdata))
-      refdata= as.list(refdata)
-      names(refdata) = nms
-      refdata = list2env(refdata)
-    }
-  }
+  # if(any(class(refdata) == 'environment')){
+  #   enc = Encoding(names(refdata))
+  #   if(!all(enc == 'UTF-8')){
+  #     nms = enc2utf8(names(refdata))
+  #     refdata= as.list(refdata)
+  #     names(refdata) = nms
+  #     refdata = list2env(refdata)
+  #   }
+  # }
 
   if(!any(class(refdata) == 'environment')){
     enc = Encoding(refdata)
@@ -48,15 +48,15 @@ name_freq = function(n,refdata,start = 1,end = 9999, log = T){
   #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
   #        Windows = Sys.setlocale(locale = 'chs'))
 
-  if(any(class(refdata) == 'environment')){
-    enc = Encoding(names(refdata))
-    if(!all(enc == 'UTF-8')){
-      nms = enc2utf8(names(refdata))
-      refdata= as.list(refdata)
-      names(refdata) = nms
-      refdata = list2env(refdata)
-    }
-  }
+  # if(any(class(refdata) == 'environment')){
+  #   enc = Encoding(names(refdata))
+  #   if(!all(enc == 'UTF-8')){
+  #     nms = enc2utf8(names(refdata))
+  #     refdata= as.list(refdata)
+  #     names(refdata) = nms
+  #     refdata = list2env(refdata)
+  #   }
+  # }
 
   if(!any(class(refdata) == 'environment')) refdata = name_freq_table(refdata, start, end)
 
@@ -77,15 +77,15 @@ name_freq_compare = function(n1,n2,refdata,start = 1,end = 9999, log = T){
   #        Darwin = Sys.setlocale(locale = 'zh_CN.GBK'),
   #        Windows = Sys.setlocale(locale = 'chs'))
 
-  if(any(class(refdata) == 'environment')){
-    enc = Encoding(names(refdata))
-    if(!all(enc == 'UTF-8')){
-      nms = enc2utf8(names(refdata))
-      refdata= as.list(refdata)
-      names(refdata) = nms
-      refdata = list2env(refdata)
-    }
-  }
+  # if(any(class(refdata) == 'environment')){
+  #   enc = Encoding(names(refdata))
+  #   if(!all(enc == 'UTF-8')){
+  #     nms = enc2utf8(names(refdata))
+  #     refdata= as.list(refdata)
+  #     names(refdata) = nms
+  #     refdata = list2env(refdata)
+  #   }
+  # }
 
   if(!any(class(refdata) == 'environment')) refdata = name_freq_table(refdata, start, end)
 
