@@ -41,6 +41,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
       res[doinds] = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
       res[blankinds] = NA
       res[one_blankinds] = 0
+
       if(method == 'lcs'){
         res = res * (nchar(s_1)+nchar(s_2))/2 / pmin(nchar(s_1),nchar(s_2))
       } #redefine denominator to be maximum shared string length(i.e. shorter of two strings)
