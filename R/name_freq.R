@@ -17,7 +17,6 @@ name_freq_table = function(refdata,start = 1, end= 9999){
          Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
          Windows = Sys.setlocale(locale = 'chs'))
 
-
   if(!any(class(refdata) == 'environment')){
     ns = substr(refdata,start,end)
     ns[nchar(ns)==0] = NA
@@ -36,7 +35,6 @@ name_freq = function(n,refdata,start = 1,end = 9999, log = T){
   switch(OS, Linux = Sys.setlocale(locale = 'en_US.UTF-8'),
          Darwin = Sys.setlocale(locale = 'en_US.UTF-8'),
          Windows = Sys.setlocale(locale = 'chs'))
-
   if(!any(class(refdata) == 'environment')) refdata = name_freq_table(refdata, start, end)
 
   ns = substr(n,start,end)
