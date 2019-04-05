@@ -79,7 +79,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
 
     if(method == 'lcs'){
       meanchar = rowMeans(nchar(torun[,1:2]))
-      minchar = pmin(nchar(torun[,1:2]))
+      minchar = pmin(nchar(torun[,1]),nchar(torun[,2]))
       simtemp = simtemp * meanchar / minchar
     }
 
