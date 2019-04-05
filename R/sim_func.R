@@ -17,38 +17,49 @@
 
 sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be string vectors
 
+  if(any(c('data.frame','matrix') %in% class(s_1))){
+    temp = lapply(1:ncol(s_1), function(c){
+      sim_func(s_1[,c],s_2[,c])
+    })
+
+    temp = do.call(cbind,temp)
+    return(apply(temp,1,match.fun(aggr)))
+  }
+
   blankinds = which((nchar(s_1) + nchar(s_2)) == 0)
 
   one_blankinds = which((nchar(s_1) + nchar(s_2)) != 0 & (nchar(s_1) * nchar(s_2)) == 0)
 
   doinds = which((nchar(s_1) * nchar(s_2)) > 0)
 
+  hominds = doinds[grep('\\[\\w*,\\w*\\]',paste(s_1[doinds],s_2[doinds]))]
+
   if(method == 'jaccard'){s_1 = paste0('_',s_1,'_'); s_2 = paste0('_',s_2,'_')}
-
-    if(any(c('data.frame','matrix') %in% class(s_1))){
-      temp = lapply(1:ncol(s_1), function(c){
-        sim_func(s_1[,c],s_2[,c])
-      })
-
-      temp = do.call(cbind,temp)
-      return(apply(temp,1,match.fun(aggr)))
-    }
 
   res = rep(0,length(s_1))
 
-  hominds = unique(grep('\\[\\w*,\\w*\\]',paste(s_1,s_2)))
     if(length(hominds)==0){
       res[doinds] = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
+      if(method == 'lcs'){
+        meanchar = (nchar(s_1[doinds]) + nchar(s_2[doinds])) / 2
+        minchar = pmin(nchar(s_1[doinds]),nchar(s_2[doinds]))
+
+        res[doinds] = res[doinds] * meanchar / minchar
+      }     #redefine denominator to be maximum shared string length(i.e. shorter of two strings)
       res[blankinds] = NA
       res[one_blankinds] = 0
 
-      if(method == 'lcs'){
-        res = res * (nchar(s_1)+nchar(s_2))/2 / pmin(nchar(s_1),nchar(s_2))
-      } #redefine denominator to be maximum shared string length(i.e. shorter of two strings)
       return(res)
     }
+
     doinds = setdiff(doinds,hominds)
     res[doinds] = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
+    if(method == 'lcs'){
+      meanchar = (nchar(s_1[doinds]) + nchar(s_2[doinds])) / 2
+      minchar = pmin(nchar(s_1[doinds]),nchar(s_2[doinds]))
+
+      res[doinds] = res[doinds] * meanchar / minchar
+    }
 
     torun = do.call(rbind,lapply(hominds,function(i){
 
@@ -63,17 +74,18 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
       }else v2
       matrix(c(rep(s1,each=length(s2)),rep(s2,length(s1)),rep(i,length(s1)*length(s2))),ncol=3)
     }))
+
     simtemp = stringsim(torun[,1],torun[,2],method=method,q=q,...)
+
+    if(method == 'lcs'){
+      meanchar = rowMeans(nchar(torun[,1:2]))
+      minchar = pmin(nchar(torun[,1:2]))
+      simtemp = simtemp * meanchar / minchar
+    }
 
     res[hominds] = tapply(simtemp,as.integer(torun[,3]),max)
     res[blankinds] = NA
     res[one_blankinds] = 0
-
-    if(method == 'lcs'){
-      res[res!=0] = res[res!=0] *
-        (nchar(s_1[res!=0])+nchar(s_2[res!=0]))/2 /
-        pmin(nchar(s_1[res!=0]),nchar(s_2[res!=0]))
-    } #redefine denominator to be maximum shared string length(i.e. shorter of two strings)
 
     return(res)
 
