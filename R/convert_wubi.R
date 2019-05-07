@@ -9,7 +9,7 @@
 
 ChStr2wb <- function(Chin.strs, sep = "_", ...){
 
-  maxchar = max(nchar(Chin.strs))
+  maxchar = max(nchar(Chin.strs),na.rm = T)
   enc = Encoding(Chin.strs)
 
   if(!all(enc == 'UTF-8')) Chin.strs = enc2utf8(Chin.strs)

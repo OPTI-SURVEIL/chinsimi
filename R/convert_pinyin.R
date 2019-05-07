@@ -10,7 +10,7 @@
 
 ChStr2py <- function(Chin.strs, tones = TRUE, multi = TRUE, sep = "_", ...){
 
-    maxchar = max(nchar(Chin.strs))
+    maxchar = max(nchar(Chin.strs),na.rm=T)
     enc = Encoding(Chin.strs)
 
     if(!all(enc == 'UTF-8')) Chin.strs = enc2utf8(Chin.strs)

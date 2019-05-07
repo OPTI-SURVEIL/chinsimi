@@ -11,7 +11,7 @@
 
 ChStr2rad <- function(Chin.strs, sep = "", structure=FALSE,....){
 
-  maxchar = max(nchar(Chin.strs))
+  maxchar = max(nchar(Chin.strs),na.rm=T)
   #OS = Sys.info()['sysname']
 
   enc = Encoding(Chin.strs)
