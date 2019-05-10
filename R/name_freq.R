@@ -36,7 +36,7 @@ name_freq_table = function(refdata,start = 1, end= 9999){
     ndef = sum(!is.na(ns))
     refdata = refdata[!is.na(nm)]
     refdata[,freq:= .N/ndef, by = nm]
-    set.key(refdata,nm)
+    data.table::set.key(refdata,nm)
     refdata = unique(refdata)
   }
   refdata
