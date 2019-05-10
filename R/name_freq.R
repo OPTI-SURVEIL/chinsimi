@@ -32,10 +32,12 @@ name_freq_table = function(refdata,start = 1, end= 9999){
     if(!all(enc == 'UTF-8')) refdata = enc2utf8(refdata)
     ns = substr(refdata,start,end)
     ns[nchar(ns)==0] = NA
-    refdata = table(ns)
-    refdata = refdata/sum(refdata)
-    temp = as.list(refdata)
-    names(temp) = names(refdata)
+    refdata = data.table::data.table(nm = ns)
+    ndef = sum(!is.na(ns))
+    refdata = refdata[!is.na(nm)]
+    refdata[,freq:= .N/ndef, by = nm]
+    temp = as.list(refdata[,freq])
+    names(temp) = refdata[,nm]
     refdata = list2env(temp)
   }
   refdata
@@ -63,9 +65,8 @@ name_freq = function(n,refdata,start = 1,end = 9999, log = T){
   ns = substr(n,start,end)
   ns[nchar(ns)==0] = NA
 
-  res = 1:length(ns)
-  res[is.na(ns)] = NA
-  res[!is.na(ns)] = unlist(mget(ns[!is.na(ns)], refdata, ifnotfound = 0))
+  res = unlist(mget(ns, refdata, ifnotfound = 0))
+  res[is.na(names(res))] = NA
 
   if(log) log(res) else res
 }
