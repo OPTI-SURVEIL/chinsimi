@@ -12,7 +12,6 @@ Imports:
   stringr,
   Rcpp,
   RcppAlgos
-  
 Authors: Qu Cheng
 Maintainer: Qu Cheng <qcheng@berkeley.edu>
 Description: This package is used to measure the similarity between Chinese characters. It can convert Chinese characters to pinyin (phonetic similarity) and four corner code (shape similarity), and then use different measurement method to assess the similarity between characters or strings.
