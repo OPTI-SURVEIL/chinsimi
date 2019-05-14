@@ -1,2 +1,2 @@
 exportPattern("^[[:alpha:]]+")
-import(stringdist, stringr,data.table)
+import(stringdist, stringr,data.table,Rcpp, RcppAlgos)

@@ -41,10 +41,10 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
     if(length(hominds)==0){
       res[doinds] = stringsim(s_1[doinds],s_2[doinds],method=method,q = q, ...)
       if(method == 'lcs'){
-        meanchar = (nchar(s_1[doinds]) + nchar(s_2[doinds])) / 2
+        totalchar = nchar(s_1[doinds]) + nchar(s_2[doinds])
         minchar = pmin(nchar(s_1[doinds]),nchar(s_2[doinds]))
 
-        res[doinds] = res[doinds] * meanchar / minchar
+        res[doinds] = res[doinds] * totalchar/2 / minchar
       }     #redefine denominator to be maximum shared string length(i.e. shorter of two strings)
       res[blankinds] = NA
       res[one_blankinds] = 0
