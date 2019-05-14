@@ -127,7 +127,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
   }
   mat = matrix(0,nrow = ns1,ncol = ns2)
 
-  mat[nhcombs[,1],nhcombs[,2]] = 1-dist1
+  mat[nhcombs] = 1-dist1
 
   if((sum(hommargins1) + sum(hommargins2)) >0){
     hominds1 = which(hommargins1)
