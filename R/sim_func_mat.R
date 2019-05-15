@@ -65,24 +65,27 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
         apply(temp,2,min)
       } )
 
-      hdo = RcppAlgos::comboGeneral(1:length(homonyms),2)
+      if(length(homonyms)>1){
+        hdo = RcppAlgos::comboGeneral(1:length(homonyms),2)
 
-      dist_h_vs_h = lapply(1:nrow(hdo),function(i){
-        v1 = homonyms[[hdo[i,1]]]; v2 = homonyms[[hdo[i,2]]]
-        temp = stringdistmatrix(v1,v2,method = method, q = q,...)
-        if(method == 'lv'){
-          ncinds = expand.grid.jc(1:length(v1),1:length(v2))
-          denom = pmax(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
-          temp = temp / denom
-        }
-        if(method == 'lcs'){
-          ncinds = expand.grid.jc(1:length(v1),1:length(v2))
-          tchar = nchar(v1)[ncinds[,1]] + nchar(v2)[ncinds[,2]]
-          minchar = pmin(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
-          temp = 1 - (tchar - temp) /(2 * minchar)
-        }
-        min(temp)
-      })
+        dist_h_vs_h = lapply(1:nrow(hdo),function(i){
+          v1 = homonyms[[hdo[i,1]]]; v2 = homonyms[[hdo[i,2]]]
+          temp = stringdistmatrix(v1,v2,method = method, q = q,...)
+          if(method == 'lv'){
+            ncinds = expand.grid.jc(1:length(v1),1:length(v2))
+            denom = pmax(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
+            temp = temp / denom
+          }
+          if(method == 'lcs'){
+            ncinds = expand.grid.jc(1:length(v1),1:length(v2))
+            tchar = nchar(v1)[ncinds[,1]] + nchar(v2)[ncinds[,2]]
+            minchar = pmin(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
+            temp = 1 - (tchar - temp) /(2 * minchar)
+          }
+          min(temp)
+        })
+      }
+
 
       #fold homonym scores back into result
 
@@ -91,10 +94,13 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
       h_nhcombs = t(apply(h_nhcombs,1,sort, decreasing = T))
       mat[h_nhcombs] = 1 - unlist(dist_h_vs_nonh)
 
-      h_hcombs = cbind(hominds[hdo[,1]],hominds[hdo[,2]])
-      h_hcombs = t(apply(h_hcombs,1,sort,decreasing = T))
 
-      mat[h_hcombs]  = 1-unlist(dist_h_vs_h)
+      if(length(homonyms)>1){
+        h_hcombs = cbind(hominds[hdo[,1]],hominds[hdo[,2]])
+        h_hcombs = t(apply(h_hcombs,1,sort,decreasing = T))
+
+        mat[h_hcombs]  = 1-unlist(dist_h_vs_h)
+      }
 
    }
     if(length(blankmargins1)>1){
@@ -173,23 +179,26 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
     })
 
     hdo = expand.grid.jc(seq_along(homonyms1),seq_along(homonyms2))
+    if(nrow(hdo)>0){
+      dist_h_vs_h = lapply(1:nrow(hdo),function(i){
+        v1 = homonyms1[[hdo[i,1]]]; v2 = homonyms2[[hdo[i,2]]]
+        temp = stringdistmatrix(v1,v2,method = method, q = q,...)
+        if(method == 'lv'){
+          ncinds = expand.grid.jc(1:length(v1),1:length(v2))
+          denom = pmax(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
+          temp = temp / denom
+        }
+        if(method == 'lcs'){
+          ncinds = expand.grid.jc(1:length(v1),1:length(v2))
+          tchar = nchar(v1)[ncinds[,1]] + nchar(v2)[ncinds[,2]]
+          minchar = pmin(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
+          temp = 1 - (tchar - temp) /(2 * minchar)
+        }
+        min(temp)
+      })
+    }
 
-    dist_h_vs_h = lapply(1:nrow(hdo),function(i){
-      v1 = homonyms1[[hdo[i,1]]]; v2 = homonyms2[[hdo[i,2]]]
-      temp = stringdistmatrix(v1,v2,method = method, q = q,...)
-      if(method == 'lv'){
-        ncinds = expand.grid.jc(1:length(v1),1:length(v2))
-        denom = pmax(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
-        temp = temp / denom
-      }
-      if(method == 'lcs'){
-        ncinds = expand.grid.jc(1:length(v1),1:length(v2))
-        tchar = nchar(v1)[ncinds[,1]] + nchar(v2)[ncinds[,2]]
-        minchar = pmin(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
-        temp = 1 - (tchar - temp) /(2 * minchar)
-      }
-      min(temp)
-    })
+
 
     #fold homonym scores back into result
 
@@ -200,9 +209,11 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
     h_nhcombs2 = expand.grid.jc(nhinds1,hominds2)
     mat[h_nhcombs2] = 1 - unlist(dist_h_vs_nonh2)
 
-    h_hcombs = cbind(hominds1[hdo[,1]],hominds2[hdo[,2]])
+    if(nrow(hdo)>0){
+      h_hcombs = cbind(hominds1[hdo[,1]],hominds2[hdo[,2]])
+      mat[h_hcombs] = 1 - unlist(dist_h_vs_h)
+    }
 
-    mat[h_hcombs] = 1 - unlist(dist_h_vs_h)
 
 
   }
