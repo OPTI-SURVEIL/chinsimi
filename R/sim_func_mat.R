@@ -99,7 +99,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
    }
     if(length(blankmargins1)>1){
       b_bcombs = RcppAlgos::comboGeneral(blankmargins1,2)
-      h_hcombs = t(apply(b_bcombs,1,sort,decreasing = T))
+      b_bcombs = t(apply(b_bcombs,1,sort,decreasing = T))
       mat[b_bcombs] = NA
     }
 
