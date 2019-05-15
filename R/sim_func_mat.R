@@ -46,6 +46,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
 
    if(sum(hommargins1)>0){
      hominds = which(hommargins1)
+     nhinds = which(!hommargins1)
      homonyms = lapply(s_1[hominds],homonym)
       #first, for each homonym string, get minimum distance to all non-homonym strings
       dist_h_vs_nonh = lapply(homonyms,function(v){
