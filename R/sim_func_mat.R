@@ -90,7 +90,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
       #fold homonym scores back into result
 
 
-      h_nhcombs = expand.grid.jc(nhinds,hominds)
+      h_nhcombs = expand.grid.jc(doinds1,hominds)
       h_nhcombs = t(apply(h_nhcombs,1,sort, decreasing = T))
       mat[h_nhcombs] = 1 - unlist(dist_h_vs_nonh)
 
@@ -203,10 +203,10 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
     #fold homonym scores back into result
 
 
-    h_nhcombs1 = expand.grid.jc(nhinds2,hominds1)
+    h_nhcombs1 = expand.grid.jc(doinds2,hominds1)
     mat[cbind(h_nhcombs1[,2],h_nhcombs1[,1])] = 1 - unlist(dist_h_vs_nonh1)
 
-    h_nhcombs2 = expand.grid.jc(nhinds1,hominds2)
+    h_nhcombs2 = expand.grid.jc(doinds1,hominds2)
     mat[h_nhcombs2] = 1 - unlist(dist_h_vs_nonh2)
 
     if(nrow(hdo)>0){
