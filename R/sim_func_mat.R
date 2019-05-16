@@ -27,7 +27,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
   if(missing(s_2)){
     mat = matrix(0,nrow = ns1,ncol = ns1)
 
-    dist1 = stringdistmatrix(s_1[doinds1],method = method, q = q,...)
+    dist1 = stringdistmatrix(s_1[doinds1],method = parent.frame()$method, q = parent.frame()$q,...)
 
     nhcombs = RcppAlgos::comboGeneral(doinds1,2)
 
@@ -50,7 +50,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
      homonyms = lapply(s_1[hominds],homonym)
       #first, for each homonym string, get minimum distance to all non-homonym strings
       dist_h_vs_nonh = lapply(homonyms,function(v){
-        temp = stringdistmatrix(v,b=s_1[doinds1],method = method, q = q, ...)
+        temp = stringdistmatrix(v,b=s_1[doinds1],method = parent.frame()$method, q = parent.frame()$q, ...)
         if(method == 'lv'){
           ncinds = expand.grid.jc(1:length(v),doinds1)
           denom = pmax(nchar(v)[ncinds[,1]],ncs1[ncinds[,2]])
@@ -70,7 +70,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
 
         dist_h_vs_h = lapply(1:nrow(hdo),function(i){
           v1 = homonyms[[hdo[i,1]]]; v2 = homonyms[[hdo[i,2]]]
-          temp = stringdistmatrix(v1,v2,method = method, q = q,...)
+          temp = stringdistmatrix(v1,v2,method = parent.frame()$method, q = parent.frame()$q,...)
           if(method == 'lv'){
             ncinds = expand.grid.jc(1:length(v1),1:length(v2))
             denom = pmax(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
@@ -118,7 +118,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
   ns2 = length(s_2)
   doinds2 = (1:ns2)[!hommargins2 & ncs2>0]
 
-  dist1 = stringdistmatrix(s_1[doinds1],s_2[doinds2],method = method, q = q,...)
+  dist1 = stringdistmatrix(s_1[doinds1],s_2[doinds2],method = parent.frame()$method, q = parent.frame()$q,...)
 
   nhcombs = expand.grid.jc(doinds1,doinds2)
 
@@ -147,7 +147,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
 
     #first, for each homonym string, get minimum distance to all non-homonym strings
     dist_h_vs_nonh1 = lapply(homonyms1,function(v){
-      temp = stringdistmatrix(v,b=s_2[doinds2],method = method, q = q, ...)
+      temp = stringdistmatrix(v,b=s_2[doinds2],method = parent.frame()$method, q = parent.frame()$q, ...)
       if(method == 'lv'){
         ncinds = expand.grid.jc(1:length(v),doinds2)
         denom = pmax(nchar(v)[ncinds[,1]],ncs2[ncinds[,2]])
@@ -163,7 +163,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
     })
 
     dist_h_vs_nonh2 = lapply(homonyms2,function(v){
-      temp = stringdistmatrix(v,b=s_1[doinds1],method = method, q = q, ...)
+      temp = stringdistmatrix(v,b=s_1[doinds1],method = parent.frame()$method, q = parent.frame()$q, ...)
       if(method == 'lv'){
         ncinds = expand.grid.jc(1:length(v),doinds1)
         denom = pmax(nchar(v)[ncinds[,1]],ncs1[ncinds[,2]])
@@ -182,7 +182,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
     if(nrow(hdo)>0){
       dist_h_vs_h = lapply(1:nrow(hdo),function(i){
         v1 = homonyms1[[hdo[i,1]]]; v2 = homonyms2[[hdo[i,2]]]
-        temp = stringdistmatrix(v1,v2,method = method, q = q,...)
+        temp = stringdistmatrix(v1,v2,method = parent.frame()$method, q = parent.frame()$q,...)
         if(method == 'lv'){
           ncinds = expand.grid.jc(1:length(v1),1:length(v2))
           denom = pmax(nchar(v1)[ncinds[,1]],nchar(v2)[ncinds[,2]])
