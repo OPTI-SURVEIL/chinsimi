@@ -214,8 +214,6 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
       mat[h_hcombs] = 1 - unlist(dist_h_vs_h)
     }
 
-
-
   }
   if((length(blankmargins1) + length(blankmargins2))>1){
     b_bcombs = expand.grid.jc(blankmargins1,blankmargins2)
