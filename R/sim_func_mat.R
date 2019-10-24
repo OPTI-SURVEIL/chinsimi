@@ -16,7 +16,7 @@
 
 sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string vectors
 
-  if(method %in% c('cos','jaccard')) s_1 = paste0('_',s_1,'_')
+  if(method %in% c('cosine','jaccard')) s_1 = paste0('_',s_1,'_')
 
   ncs1 = nchar(s_1)
   blankmargins1 = which(ncs1 == 0)
@@ -111,7 +111,7 @@ sim_func_mat <- function(s_1, s_2,method='lv',q = 1,...){ #inputs may be string 
 
     return(mat)
   }
-  if(method %in% c('cos','jaccard')) s_2 = paste0('_',s_2,'_')
+  if(method %in% c('cosine','jaccard')) s_2 = paste0('_',s_2,'_')
   ncs2 = nchar(s_2)
   blankmargins2 = which(ncs2 == 0)
   hommargins2 = grepl('\\[\\w*,\\w*\\]',s_2)
