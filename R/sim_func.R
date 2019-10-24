@@ -34,7 +34,7 @@ sim_func <- function(s_1, s_2,aggr='mean',method='lv',q = 1,...){ #inputs may be
 
   hominds = doinds[grep('\\[\\w*,\\w*\\]',paste(s_1[doinds],s_2[doinds]))]
 
-  if(method %in% c('cosine','jaccard')){s_1 = paste0('_',s_1,'_'); s_2 = paste0('_',s_2,'_')}
+  if(method %in% c('cosine','jaccard') & q > 1){s_1 = paste0('_',s_1,'_'); s_2 = paste0('_',s_2,'_')}
 
   res = rep(0,length(s_1))
 
